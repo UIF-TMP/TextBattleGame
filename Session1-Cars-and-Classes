@@ -1,0 +1,52 @@
+class Car:
+	def __init__(self, arg_name, arg_fuel, arg_miles_driven, arg_is_engine_on):
+		self.name = arg_name 
+		self.fuel = arg_fuel
+		self.miles_driven = arg_miles_driven
+		self.is_engine_on = arg_is_engine_on
+
+	def render_stats(self):
+		print('Name of Car:', self.name)
+		print('Fuel Tank:', self.fuel, '%')
+		print('Miles Driven:', self.miles_driven)
+		print('Is Engine On:', self.is_engine_on)
+	
+	def drive(self):
+		self.fuel -= 25
+		self.miles_driven += 25
+		print('Driving', self.miles_driven, 'miles.')
+
+	def get_gas(self):
+		self.fuel += 25
+		print('Pumping Fuel... New Fuel Level:', self.fuel)
+
+	def start_engine(self):
+		self.is_engine_on = True
+		self.program_loop()
+
+	def stop_engine(self):
+		self.is_engine_on = False
+		self.render_stats()
+
+	def menu(self):
+		user_choice = input("""Options:
+         				Press 1: Drive Car
+         				Press 2: Get Gas
+         				Press 3: Turn Off Engine
+        				Choose: """)
+		if user_choice == '1':
+			self.drive()
+		elif user_choice =='2':
+			self.get_gas()
+		elif user_choice == '3':
+			self.stop_engine()
+		else:
+			print('Invalid Option.')
+		
+	def program_loop(self):
+		while self.is_engine_on == True:
+			self.render_stats()
+			self.menu()
+
+My_Ride = Car('Portche', 100, 0, False)
+My_Ride.start_engine()
